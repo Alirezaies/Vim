@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
 from __future__ import with_statement
-import vim
+
 import os
+import Queue
 import subprocess
 import threading
-import Queue
+
+import vim
 
 
 class Asyncer:
@@ -88,5 +90,3 @@ class Executor:
         while line:
             worker.record_output(line)
             line = p.stdout.readline()
-
-
