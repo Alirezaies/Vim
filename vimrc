@@ -1,27 +1,26 @@
-:silent
-:set nocp
-:set number
-:set ls=2
-:colorscheme seti
-:filetype plugin on
-:set tabstop=4
-:set expandtab
-:set softtabstop=4
-:set shiftwidth=4
-:setlocal foldmethod=indent
-:set t_Co=256
-:set nowrap
-:set clipboard=unnamed
-:set clipboard=unnamedplus
-:set autoindent
-:set cindent
-:set si
-:syntax enable
-:set showmatch
-:set hlsearch
-:set ignorecase
-:set noswapfile
-:set mouse=a
+set number
+execute pathogen#infect()
+call pathogen#helptags()
+syntax on
+colorscheme monokai
+
+"NERDTree Config
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-n> :NERDTreeToggle<CR>
+map 1 :bprevious<CR>
+map 2 :bnext<CR>
+
+"Airline Config
+set encoding=utf-8
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 1
+let g:airline_solarized_bg='dark'
+let g:airline_theme='murmur'
+
+" auto complete for ( , " , ' , [ , { 
 :inoremap        (  ()<Left>
 :inoremap        "  ""<Left>
 :inoremap        `  ``<Left>
@@ -29,43 +28,14 @@
 :inoremap        [  []<Left>
 :inoremap      {  {}<Left>
 
+" Commenting And Uncommenting
+" auto comment and uncooment with F6 and F7 key
 :autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
 :autocmd FileType sh,ruby,python   let b:comment_leader = '# '
 :noremap <silent> #6 :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR> " commenting line with F6
 :noremap <silent> #7 :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR> " uncommenting line with F7
 
-:noremap <silent> #5 :!xfce4-terminal --title "%" --hold -e "./%" <CR> <CR>" execute bash & python script with F5
-:noremap <silent> #3 :bp<CR> " switch to pervious tab with F3
-:noremap <silent> #4 :bn<CR> " switch to next tab with F2
-:map <F8> :setlocal spell! spelllang=en_us<CR> " check spelling with F8
-:set pastetoggle=<F2>
-" plugins
-"indentLine 
-:let g:indentLine_char = '.'
-" autocomplpop setting
-:set omnifunc=syntaxcomplete " This is necessary for acp plugin
-:let g:acp_behaviorKeywordLength = 1 "  Length of keyword characters before the cursor, which are needed to attempt keyword completion
-
-" airline plugin setting
-:let g:airline_theme='powerlineish' " set airline plugin theme
-:let g:airline#extensions#tabline#enabled = 1 " showing tabs 
-:let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
-
- " unicode symbols
-  let g:airline_left_sep = '»'
-  let g:airline_left_sep = '▶'
-  let g:airline_right_sep = '«'
-  let g:airline_right_sep = '◀'
-
-" NERDTree plugin setting
-:map <F9> :NERDTreeToggle<CR> " toggle showing NERDTree
-"open a NERDTree automatically when vim starts up if no files were specified
-:autocmd StdinReadPre * let s:std_in=1
-:autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-:autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " close vim if the only window left open is a NERDTree
+" Closing Buffers Properly
 " Delete buffer while keeping window layout (don't close buffer's windows).
 " Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
 if v:version < 700 || exists('loaded_bclose') || &cp
@@ -139,9 +109,16 @@ endfunction
 command! -bang -complete=buffer -nargs=? Bclose call <SID>Bclose('<bang>', '<args>')
 nnoremap <silent> <Leader>bd :Bclose<CR>
 nnoremap <silent> <Leader>bD :Bclose!<CR>
-"indent plugin
-:let g:indentLine_char = '┆'
 
-"vim-airline-clock 
-:let g:airline#extensions#clock#format = '%c'
+map <F2> :Bclose<CR>
+map <F3> :bd<CR>
 
+" IndentLine
+set list lcs=tab:\|\ 
+let g:indentLine_char = '┆'
+
+" Python Syntax Highlight
+ let python_highlight_all = 1
+
+" Molokai
+let g:molokai_original = 1
