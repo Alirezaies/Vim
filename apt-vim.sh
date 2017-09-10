@@ -13,6 +13,6 @@ aptvim() {
 aptvim;
 
 if [ $STATUS -eq 2 ]; then
-    echo "apt-vim needs to be installed, trying to install apt-vim\n"
+    echo "apt-vim needs to be installed, trying to install apt-vim"
     curl -sL https://raw.githubusercontent.com/egalpin/apt-vim/master/install.sh | sh
 fi
