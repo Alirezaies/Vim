@@ -12,5 +12,6 @@ git clone https://github.com/yggdroot/indentline ~/.vim/bundle/indentline
 git clone https://github.com/roxma/vim-paste-easy ~/.vim/bundle/vim-paste-easy
 git clone https://github.com/nathanaelkane/vim-indent-guides ~/.vim/bundle/vim-indent-guides
 git clone https://github.com/davidhalter/jedi-vim ~/.vim/bundle/jedi-vim
+git clone https://github.com/raimondi/delimitmate
 
 echo "Install Complete"
